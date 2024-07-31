@@ -25,7 +25,7 @@ jobs:  # 定义了一系列的工作，这些工作可以并行执行，也可�
     - name: Setup Flutter  # 第二步，设置Flutter环境
       uses: subosito/flutter-action@v1
       with:
-        flutter-version: '2.2.3'  # 指定Flutter版本号
+        flutter-version: '3.16.4'  # 指定Flutter版本号
 
     - name: Install dependencies  # 第三步，安装依赖
       run: flutter pub get
@@ -50,7 +50,7 @@ jobs:  # 定义了一系列的工作，这些工作可以并行执行，也可�
     - name: Setup Flutter
       uses: subosito/flutter-action@v1
       with:
-        flutter-version: '2.2.3'
+        flutter-version: '3.16.4'
 
     - name: Install dependencies
       run: flutter pub get
@@ -75,7 +75,7 @@ jobs:  # 定义了一系列的工作，这些工作可以并行执行，也可�
     - name: Setup Flutter
       uses: subosito/flutter-action@v1
       with:
-        flutter-version: '2.2.3' 
+        flutter-version: '3.16.4' 
 
     - name: Install dependencies
       run: flutter pub get
