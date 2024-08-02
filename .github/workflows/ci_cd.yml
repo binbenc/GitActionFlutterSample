@@ -45,13 +45,6 @@ jobs:  # 定义了一系列的工作，这些工作可以并行执行，也可�
     - name: Github Events To Feishu Bot Action  # 第七步，发送消息到飞书机器人
       uses: junka/feishu-bot-webhook-action@1.0.11
 
-    - name: Download APK from build
-      uses: actions/download-artifact@v2
-      with:
-          name: apk
-    - name: Display structure of downloaded files
-      run: ls -R
-
             
   build_ios:
     runs-on: macos-latest  # 注意这里选择了macOS环境

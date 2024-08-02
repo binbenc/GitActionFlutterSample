@@ -13,6 +13,12 @@ on:
       - '**/*.png'
       - '**/*.jpg'
 
+
+permissions:
+  contents: read
+  actions: read
+  checks: write
+
 jobs:
   build:
     name: Build
