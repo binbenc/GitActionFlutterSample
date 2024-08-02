@@ -45,14 +45,32 @@ jobs:  # 定义了一系列的工作，这些工作可以并行执行，也可�
     - name: Github Events To Feishu Bot Action  # 第七步，发送消息到飞书机器人
       uses: junka/feishu-bot-webhook-action@1.0.11
 
-
-    - name: publish                        # 第八步，发布
-      uses: ncipollo/release-action@v1
+    - name: Download APK from build
+      uses: actions/download-artifact@v2
       with:
-        artifacts: "*.apk"
-        token: ${{ github.token }}
-        generateReleaseNotes: true
+          name: apk
+    - name: Display structure of downloaded files
+      run: ls -R
 
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1.1.4
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+
+    - name: Upload Release APK
+      id: upload_release_asset
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./app-release.apk
+          asset_name: app-release.apk
+          asset_content_type: application/zip
             
   build_ios:
     runs-on: macos-latest  # 注意这里选择了macOS环境
