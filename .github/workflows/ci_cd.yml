@@ -7,11 +7,10 @@ on:
   # 当代码被推送到任意分支时，或者有新的Pull Request时，触发工作流
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
     tags:
       - 'v*'  # 当推送的标签名以v开头时，触发工作流，这常用于发布新版本
+  pull_request:
+    branches: [ main ]
 
 jobs:  # 定义了一系列的工作，这些工作可以并行执行，也可以按照依赖顺序执行
   build_and_test:  # 这是第一个工作的名称，你可以自行定义
@@ -45,6 +44,15 @@ jobs:  # 定义了一系列的工作，这些工作可以并行执行，也可�
 
     - name: Github Events To Feishu Bot Action  # 第七步，发送消息到飞书机器人
       uses: junka/feishu-bot-webhook-action@1.0.11
+
+
+    - name: publish                        # 第八步，发布
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: "*.apk"
+        token: ${{ github.token }}
+        generateReleaseNotes: true
+
             
   build_ios:
     runs-on: macos-latest  # 注意这里选择了macOS环境
